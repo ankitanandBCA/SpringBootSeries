@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Address Beans for collection -->
+    <bean id="adr1" class="com.spc.Address">
+        <property name="city" value="City1"/>
+        <property name="state" value="State1"/>
+        <property name="country" value="Country1"/>
+    </bean>
+
+    <bean id="adr2" class="com.spc.Address">
+        <property name="city" value="City2"/>
+        <property name="state" value="State2"/>
+        <property name="country" value="Country2"/>
+    </bean>
+
+    <bean id="adr3" class="com.spc.Address">
+        <property name="city" value="City3"/>
+        <property name="state" value="State3"/>
+        <property name="country" value="Country3"/>
+    </bean>
+
+    <!-- Main Address Bean -->
+    <bean id="adr" class="com.spc.Address">
+        <property name="city" value="Bhagalpur"/>
+        <property name="state" value="Bihar"/>
+        <property name="country" value="India"/>
+    </bean>
+
+    <!-- Student Bean -->
+    <bean id="stu" class="com.spc.Student" scope="prototype">
+        <property name="name" value="ankit"/>
+        <property name="age" value="25"/>
+        <property name="address" ref="adr"/>
+
+        <property name="address1">
+            <list>
+                <ref bean="adr1"/>
+                <ref bean="adr2"/>
+                <ref bean="adr3"/>
+            </list>
+        </property>
+
+        <property name="address2">
+            <set>
+                <ref bean="adr1"/>
+                <ref bean="adr2"/>
+                <ref bean="adr3"/>
+            </set>
+        </property>
+    </bean>
+
+</beans>

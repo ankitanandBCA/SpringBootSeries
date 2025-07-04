@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Bean with properties inside 
+    <bean id="emp" class="com.spc.Employee" autowire="byName">
+        <property name="name" value="Ankit"/>
+        <property name="age" value="25"/>
+        <property name="address" ref="adr"/>
+    </bean>
+
+    <bean id="adr" class="com.spc.Address">
+        <property name="city" value="Bhagalpur"/>
+        <property name="state" value="Bihar"/>
+        <property name="country" value="India"/>
+    </bean>
+-->
+
+
+     <!-- Employee Bean with autowiring by name 
+    <bean id="emp" class="com.spc.Employee" autowire="byName">
+        <property name="name" value="Ankit"/>
+        <property name="age" value="25"/>
+    </bean>
+
+    
+    <bean id="adr" class="com.spc.Address">
+        <property name="city" value="Bhagalpur"/>
+        <property name="state" value="Bihar"/>
+        <property name="country" value="India"/>
+    </bean>
+    
+    -->
+    
+     <!-- Employee Bean with autowiring by type -->
+    
+      <bean id="emp" class="com.spc.Employee" autowire="byName">
+        <property name="name" value="Ankit"/>
+        <property name="age" value="25"/>
+    </bean>
+
+    <!-- Address Bean -->
+    <bean id="adr" class="com.spc.Address">
+        <property name="city" value="Bhagalpur"/>
+        <property name="state" value="Bihar"/>
+        <property name="country" value="India"/>
+    </bean>
+    
+    
+</beans>
