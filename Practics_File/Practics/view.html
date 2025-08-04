@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section id="userTable" class="user-table-section" style="padding: 30px;">
+  <h2>User Information Table</h2>
+  <table border="1" width="100%" cellspacing="0" cellpadding="10">
+    <thead style="background-color: #007BFF; color: white;">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="userData">
+      <!-- Rows will be inserted here dynamically -->
+    </tbody>
+  </table>
+</section>
+
+<script>
+  async function fetchUserData() {
+    try {
+      const response = await fetch("http://localhost:8080/users"); // Replace with actual GET URL
+      const users = await response.json();
+
+      const tableBody = document.getElementById("userData");
+      tableBody.innerHTML = "";
+
+      users.forEach(user => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td>${user.id}</td>
+          <td>${user.name}</td>
+          <td>${user.email}</td>
+          <td>${user.mobile}</td>
+          <td><img src="data:image/jpeg;base64,${user.imageBase64}" width="80" /></td>
+          <td>
+            <button onclick="editUser(${user.id})">Edit</button>
+            <button onclick="deleteUser(${user.id})">Delete</button>
+          </td>
+        `;
+
+        tableBody.appendChild(row);
+      });
+
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  }
+
+  // Call fetch on load
+  window.onload = fetchUserData;
+
+
+
+
+
+
+
+
+
+  // Placeholder edit/delete functions
+  function editUser(id) {
+    alert("Edit user with ID: " + id);
+    // Redirect or show edit form here
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  async function deleteUser(id) {
+    const confirmed = confirm("Are you sure you want to delete?");
+    if (!confirmed) return;
+
+    try {
+      const response = await fetch(`http://localhost:8080/delete-user/${id}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        alert("User deleted successfully!");
+        fetchUserData(); // Refresh table
+      } else {
+        alert("Failed to delete user.");
+      }
+    } catch (err) {
+      console.error("Error deleting user:", err);
+    }
+  }
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
