@@ -137,7 +137,7 @@
 
 <div class="form-container">
     <h2>User Information</h2>
-    <form  enctype="multipart/form-data">
+    <form  enctype="multipart/form-data" onsubmit="fom(event)">
       
       <div class="form-group">
         <label for="name">Full Name</label>
@@ -166,20 +166,45 @@
 
 
 <script>
-  const form = document.querySelector("form");
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+async function fom(event) {
+  event.preventDefault();
 
-    const formData = new FormData(form);
+const formData = new FormData();
+  formData.append("name", document.getElementById("name").value);
+  formData.append("email", document.getElementById("email").value);
+  formData.append("mobile", document.getElementById("mobile").value);
+  const imageFile = document.getElementById("image").files[0];
+  formData.append("image", imageFile);
 
+  try {
     const response = await fetch("http://localhost:8080/upload", {
       method: "POST",
       body: formData
     });
 
-    const result = await response.text();
-    alert(result);
-  });
+    if (response.ok) {
+      alert("User information submitted successfully!");
+      window.location.href = "view.html"; // Redirect to view page
+    } else {
+      alert("Failed to submit user information.");
+    }
+  } catch (error) {
+    console.error("Error submitting user information:", error);
+    alert("An error occurred while submitting the form.");
+  }
+
+
+
+
+
+
+}
+
+
+
+
+
+  
 </script>
 
 

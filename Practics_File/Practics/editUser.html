@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit User</title>
+</head>
+<body>
+<h2>Edit User</h2>
+
+<form id="updateForm" enctype="multipart/form-data">
+  <input type="text" name="name" id="name" placeholder="Enter name" required />
+  <input type="email" name="email" id="email" placeholder="Enter email" required />
+  <input type="number" name="mobilenumber" id="mobile" placeholder="Enter mobile number" required />
+  <input type="file" name="image" id="image" required />
+  <button type="submit">Update</button>
+</form>
+
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const userId = urlParams.get("userid"); // ✅ Get user ID from URL
+
+  document.getElementById("updateForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const form = document.getElementById("updateForm");
+    const formData = new FormData(form);
+
+    fetch(`http://localhost:8080/update/${userId}`, {
+      method: "PUT",
+      body: formData,
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Update failed");
+        return response.text();
+      })
+      .then((data) => {
+        alert("User updated successfully!");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
+</script>
+
+
+
+
+
+
+</body>
+
+</html>

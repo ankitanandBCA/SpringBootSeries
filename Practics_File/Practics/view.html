@@ -28,7 +28,7 @@
 <script>
   async function fetchUserData() {
     try {
-      const response = await fetch("http://localhost:8080/users"); // Replace with actual GET URL
+      const response = await fetch("http://localhost:8080/finds"); // Replace with actual GET URL
       const users = await response.json();
 
       const tableBody = document.getElementById("userData");
@@ -41,8 +41,8 @@
           <td>${user.id}</td>
           <td>${user.name}</td>
           <td>${user.email}</td>
-          <td>${user.mobile}</td>
-          <td><img src="data:image/jpeg;base64,${user.imageBase64}" width="80" /></td>
+          <td>${user.mobilenumber}</td>
+          <td><img src="data:image/jpeg;base64,${user.image}" width="80" /></td>
           <td>
             <button onclick="editUser(${user.id})">Edit</button>
             <button onclick="deleteUser(${user.id})">Delete</button>
@@ -63,17 +63,11 @@
 
 
 
-
-
-
-
-
-  // Placeholder edit/delete functions
-  function editUser(id) {
-    alert("Edit user with ID: " + id);
-    // Redirect or show edit form here
-  }
-
+//  editUser function
+function editUser(id) {
+  // Navigate to edit.html with user id in query params
+  window.location.href = `edit.html?id=${id}`;
+}
 
 
 
@@ -91,26 +85,33 @@
 
 
 
-  
+
+
+
+
+
   async function deleteUser(id) {
-    const confirmed = confirm("Are you sure you want to delete?");
-    if (!confirmed) return;
+  const confirmed = confirm("Are you sure you want to delete?");
+  if (!confirmed) return;
 
-    try {
-      const response = await fetch(`http://localhost:8080/delete-user/${id}`, {
-        method: "DELETE",
-      });
+  try {
+    const response = await fetch(`http://localhost:8080/delete/${id}`, {
+      method: "DELETE",
+    });
 
-      if (response.ok) {
-        alert("User deleted successfully!");
-        fetchUserData(); // Refresh table
-      } else {
-        alert("Failed to delete user.");
-      }
-    } catch (err) {
-      console.error("Error deleting user:", err);
+    const result = await response.json(); // <--- ADD THIS LINE
+
+    if (result === true) {
+      alert("User deleted successfully!");
+      fetchUserData(); // Refresh table
+    } else {
+      alert("Failed to delete user.");
     }
+  } catch (err) {
+    console.error("Error deleting user:", err);
   }
+}
+
 
 
 
