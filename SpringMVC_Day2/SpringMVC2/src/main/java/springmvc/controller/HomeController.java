@@ -52,4 +52,26 @@ public class HomeController {
 		 
 		return modelAndView;
 	}
+
+
+@RequestMapping("/help")
+	public String help(Model model) {
+	    model.addAttribute("name", "ankit anand");
+	    model.addAttribute("id", 1234);
+
+	    List<Integer> list = new ArrayList<>();
+	    list.add(12);
+	    list.add(123);
+	    list.add(1234);
+	    list.add(12345);
+	    list.add(123456);
+
+	    model.addAttribute("marks", list);
+
+	    return "help";
+	}
+	
 }
+
+
+
