@@ -1,0 +1,2 @@
+Data send to Controller->{Model,ModelAndView}->View
+Data Send to View->Controller
