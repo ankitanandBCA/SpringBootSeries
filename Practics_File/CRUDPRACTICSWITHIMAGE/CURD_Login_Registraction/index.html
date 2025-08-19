@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Navbar</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      padding: 10px 20px;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 15px;
+    }
+    .navbar a:hover {
+      background-color: #575757;
+      border-radius: 5px;
+    }
+      .form-container {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 300px;
+    }
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .form-container input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-container button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .form-container button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="logo">
+    <a href="#">MyApp</a>
+  </div>
+  <div class="links">
+    <a href="index.html">Upload</a>
+    <a href="view.html">View</a>
+  </div>
+</div>
+<div class="form-container">
+  <h2>Registration</h2>
+  <form onsubmit="reg(event)">
+    <input type="text" id="name" name="name" placeholder="Enter Name" required>
+    <input type="email" id="email" name="email" placeholder="Enter Email" required>
+    <input type="file" id="file" name="file" placeholder="Upload image" required>
+    <input type="password" id="password" name="password" placeholder="Enter Password" required>
+    <button type="submit">Register</button>
+  </form>
+</div>
+
+<script>
+
+async function reg(event) {
+
+  event.preventDefault();
+  const name=document.getElementById("name").value;
+  const email=document.getElementById("email").value;
+  const file=document.getElementById("file").files[0];
+  const password=document.getElementById("password").value;
+
+  const formData=new FormData();
+  formData.append("name",name);
+  formData.append("email",email);
+  formData.append("file",file);
+  formData.append("password",password);
+
+
+  const baseurl="http://localhost:8080/register";
+  try{
+        const response=await fetch(baseurl,{
+          method:"POST",
+          body:formData
+        });
+        if(response.ok)
+        {
+          alert("register successfull")
+        }
+        else{
+          alert("not register")
+        }
+  }catch(error)
+  {
+    alert(error)
+  }
+  
+}
+
+
+
+
+
+</script>
+
+</body>
+</html>
