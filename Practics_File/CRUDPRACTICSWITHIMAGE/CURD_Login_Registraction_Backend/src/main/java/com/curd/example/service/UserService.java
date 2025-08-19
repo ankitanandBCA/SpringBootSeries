@@ -30,6 +30,32 @@ public class UserService {
     }
 
 
+/*
+   public User updateUsers(User user)
+   {
+       Optional<User> user1 = userRepo.findById(user.getId());
+       User user2 = user1.get();
+       user2.setName(user.getName());
+       user2.setEmail(user.getEmail());
+       user2.setPassword(user.getPassword());
+
+       return userRepo.save(user2);
+
+   }
+
+
+ */
+
+    public User updateUsers(User u) {
+        return userRepo.findById(u.getId())
+                .map(existingUser -> {
+                    existingUser.setName(u.getName());
+                    existingUser.setEmail(u.getEmail());
+                    existingUser.setPassword(u.getPassword());
+                    return userRepo.save(existingUser);
+                })
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + u.getId()));
+    }
 
 
 
@@ -37,3 +63,4 @@ public class UserService {
 
 
 }
+
