@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>update </title>
+    <style>
+          .form-container {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 300px;
+    }
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .form-container input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-container button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .form-container button:hover {
+      background: #0056b3;
+    }
+    </style>
+</head>
+<body>
+    <h1>Update data</h1>
+    <div class="form-container">
+     <form id="updatefrom" onsubmit="updatedata(event)">
+    <input type="text" id="upname" name="upname" placeholder="Enter Name" required>
+    <input type="email" id="upemail" name="upemail" placeholder="Enter Email" required>
+   
+    <input type="password" id="uppassword" name="uppassword" placeholder="Enter Password" required>
+    <button type="submit">update</button>
+  </form>
+</div>
+
+
+    <script>
+        /*
+        document.addEventListener("DOMContentLoaded",()=>{
+            const urlParam=new URLSearchParams(window.location.search)
+
+           document.getElementById("upname").value=urlParam.get('name')
+           document.getElementById("upemail").value=urlParam.get('email')
+         
+           document.getElementById("uppassword").value=urlParam.get('password')
+         
+
+        })
+        async  function updatedata(event){
+            event.preventDefault()
+             const name=document.getElementById("upname").value;
+  const email=document.getElementById("upemail").value;
+
+  const password=document.getElementById("uppassword").value;
+
+
+     const data={name,email,password}
+     console.log(JSON.stringify(data));
+     
+     const updateData=`http://localhost:8080/update`
+
+         try{
+             const response= await fetch(updateData,{
+               method:"PUT",
+               headers:{
+                 'Content-Type':'application/json'
+               },body:JSON.stringify(data)
+
+             });
+             if(response.ok)
+             {
+                alert("update successfully")
+                window.location.href="view.html"
+             }
+             else{
+                alert("not update")
+             }
+
+         }catch(error)
+         {
+            alert(error)
+         }
+
+
+          }
+
+*/
+
+async function updatedata(id) {
+  const name = document.getElementById("upname").value;
+  const email = document.getElementById("upemail").value;
+  const password = document.getElementById("uppassword").value;
+
+  const user = { name, email, password };
+
+  const response = await fetch(`http://localhost:8080/update/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user)
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    console.log("Updated:", data);
+    alert("User updated successfully!");
+  } else {
+    alert("Update failed!");
+  }
+}
+
+
+
+    </script>
+</body>
+</html>
