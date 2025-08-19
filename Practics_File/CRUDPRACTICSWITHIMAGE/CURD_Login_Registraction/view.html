@@ -61,12 +61,14 @@
   }
 
   // Example edit and update
-
- function editUser(id) {
-    // user id ko localStorage me save karke edit page par bhejna
-    localStorage.setItem("editUserId", id);
-    window.location.href = "edit.html";
+  // Example edit and update
+  /*
+function editUser(id,name,email,password) {
+  window.location.href =`update.html?id=${id}&name=${name}&email=${email}&password=${password}`
 }
+
+*/
+window.location.href =`update.html?id=${id}`
 
   
 // delete data
@@ -102,4 +104,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </body>
+
 </html>
