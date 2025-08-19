@@ -58,4 +58,28 @@ public class UserController
 
 
 
+
+
+// update data
+/*
+    @PutMapping("/update")
+    public User up(@RequestBody User user)
+    {
+        return userService.updateUsers(user);
+
+    }
+*/
+@PutMapping("/update/{id}")
+public ResponseEntity<User> up(@PathVariable int id, @RequestBody User user) {
+    user.setId(id); // ensure id set ho
+    User updatedUser = userService.updateUsers(user);
+    return ResponseEntity.ok(updatedUser);
 }
+
+
+
+    
+
+
+}
+
