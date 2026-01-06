@@ -13,6 +13,16 @@ public class UserController {
     @Autowired
     UserService userService;
 
+
+@GetMapping("/home")
+    public  String home()
+    {
+        return "this is home page";
+    }
+
+
+    
+
     @GetMapping("/Allusers")
     public List<User> fetchalluser() {
         return userService.getAllUser();
@@ -28,3 +38,4 @@ public class UserController {
         return userService.adduser(u);
     }
 }
+
